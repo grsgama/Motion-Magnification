@@ -1,6 +1,9 @@
 from dependencies import * 
 from utils import *
 from filterbank import TemporalFilter
+from tkinter import *
+from tkinter import filedialog
+from glob import glob
 
 
 
@@ -104,27 +107,32 @@ def magnify(input_video_filename, lowFreq, highFreq, output_video_filename, wind
 
 
 
-
-
-
-
-
-
-
 if __name__ == '__main__':
 	# define input and output
-	input_video_filename = 'C:/Repositorio/videos/guitar.mp4'
-	output_video_filename = 'C:/Repositorio/videos/guitar' + '_guitar_a' + '.mp4'
+	dir_in = 'C:/Repositorio/videos'
+	dir_out = 'C:/Repositorio/output_videos'
+	dir_data = 'C:/Repositorio/output_videos'
+	
+	root = Tk()
+	root.withdraw()
+
+	print("Escolhendo o arquivo")
+	reading = filedialog.askopenfile(initialdir=dir_in)
+	print(reading.name)
+
+	input_video_filename = reading.name
+
+	#input_video_filename = 'C:/Repositorio/videos/guitar.mp4'
+	#C:/Repositorio/Motion-Magnification/videos/guitar.mp4
+	output_video_filename = 'C:/Repositorio/Motion-Magnification/output_videos/guitar' + '_amplification_a' + '.mp4'
 
 	# params
-	window_size = 10
-	magnif_factor = 6
+	window_size = 30
+	magnif_factor = 50
 	fps_bandpass = 600
 
 	lowFreq = 72
 	highFreq = 92
-	
-
 
 	magnify(input_video_filename, lowFreq, highFreq, output_video_filename, window_size=window_size, 
 		magnif_factor=magnif_factor, fps_bandpass=fps_bandpass)
